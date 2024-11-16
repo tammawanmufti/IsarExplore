@@ -14,16 +14,15 @@ class CourseRepositoryImpl extends CourseRepository {
   final LocalCourseDataSource localCourseDatasource;
 
   @override
-  Course assignStudentToCourse(
-      {required int courseId, required int studentId}) {
-    // TODO: implement assignStudentToCourse
-    throw UnimplementedError();
+  Future<void> assignStudentToCourse(
+      {required int courseId, required int studentId}) async {
+    await localCourseDatasource.assignStudentToCourse(
+        courseId: courseId, studentId: studentId);
   }
 
   @override
-  Course assignTeacherToCourse(
+  Future<void> assignTeacherToCourse(
       {required int courseId, required int teacherId}) {
-    // TODO: implement assignTeacherToCourse
     throw UnimplementedError();
   }
 

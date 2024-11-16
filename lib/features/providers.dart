@@ -5,14 +5,15 @@ import 'package:myapp/data/datasource/local_course_datasource_impl.dart';
 import 'package:myapp/data/localstorage/college_localstorage/college_local_db.dart';
 import 'package:myapp/data/repository/course_repository_impl.dart';
 import 'package:myapp/domain/repository/course_repository.dart';
-import 'package:myapp/features/courses_page.dart';
 import 'package:myapp/features/cubit/course_cubit.dart';
 import 'package:provider/provider.dart';
 
 final _db = CollegeLocalDB();
 
 class AppProviders extends StatelessWidget {
-  const AppProviders({super.key});
+  const AppProviders({super.key, required this.child});
+
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class AppProviders extends StatelessWidget {
                   ),
                 ),
               ],
-              child: const CoursePage(),
+              child: child,
             ),
           );
         }

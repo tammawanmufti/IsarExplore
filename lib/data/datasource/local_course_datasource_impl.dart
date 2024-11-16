@@ -52,4 +52,26 @@ class LocalCourseDatasourceImpl extends LocalCourseDataSource {
         db.instance.courseEntitys.filter().idEqualTo(courseId).findFirstSync();
     return course?.teacher.value;
   }
+
+  @override
+  Future<bool> assignStudentToCourse(
+      {required int courseId, required int studentId}) async {
+    try {
+      final course =
+          db().courseEntitys.filter().idEqualTo(courseId).findFirstSync();
+      final student =
+          db().studentEntitys.filter().idEqualTo(studentId).findFirstSync();
+
+      if (course != null && student != null) {
+        course.students.add(student);
+        await db().writeTxn(() async {
+          db().courseEntitys.put(course);
+        });
+        return true;
+      }
+    } catch (e) {
+      return false;
+    }
+    return false;
+  }
 }

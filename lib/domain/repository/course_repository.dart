@@ -8,6 +8,8 @@ abstract class CourseRepository {
   Future<Course> createCourse(String name);
   Future<Student> createStudent(String name);
   Teacher createTeacher(String name);
-  Course assignStudentToCourse({required int courseId, required int studentId});
-  Course assignTeacherToCourse({required int courseId, required int teacherId});
+  Future<void> assignStudentToCourse(
+      {required int courseId, required int studentId});
+  Future<void> assignTeacherToCourse(
+      {required int courseId, required int teacherId});
 }
