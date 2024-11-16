@@ -57,4 +57,10 @@ class CourseRepositoryImpl extends CourseRepository {
     // TODO: implement getStudentsByCourseId
     throw UnimplementedError();
   }
+
+  @override
+  Course? getCourse(int courseId) {
+    final course = localCourseDatasource.getCourse(courseId);
+    return course?.toDomain;
+  }
 }

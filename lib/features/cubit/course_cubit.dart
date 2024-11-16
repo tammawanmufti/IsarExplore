@@ -21,11 +21,4 @@ class CourseCubit extends Cubit<CourseState> {
     await courseRepository.createCourse(name);
     loadAllCourse();
   }
-
-  Future<void> createAndAssignStudent(String name, int courseId) async {
-    final student = await courseRepository.createStudent(name);
-    courseRepository.assignStudentToCourse(
-        courseId: courseId, studentId: student.id);
-    loadAllCourse();
-  }
 }

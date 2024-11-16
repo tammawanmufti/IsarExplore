@@ -12,4 +12,5 @@ abstract class CourseRepository {
       {required int courseId, required int studentId});
   Future<void> assignTeacherToCourse(
       {required int courseId, required int teacherId});
+  Course? getCourse(int courseId);
 }

@@ -6,6 +6,7 @@ import 'package:myapp/data/localstorage/college_localstorage/college_local_db.da
 import 'package:myapp/data/repository/course_repository_impl.dart';
 import 'package:myapp/domain/repository/course_repository.dart';
 import 'package:myapp/features/cubit/course_cubit.dart';
+import 'package:myapp/features/cubit/course_detail_cubit.dart';
 import 'package:provider/provider.dart';
 
 final _db = CollegeLocalDB();
@@ -38,6 +39,11 @@ class AppProviders extends StatelessWidget {
               providers: [
                 BlocProvider(
                   create: (context) => CourseCubit(
+                    courseRepository: context.read(),
+                  ),
+                ),
+                BlocProvider(
+                  create: (context) => CourseDetailCubit(
                     courseRepository: context.read(),
                   ),
                 ),
