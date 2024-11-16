@@ -12,3 +12,12 @@ extension IsarLinksStudentMapper on IsarLinks<StudentEntity> {
     ).toList();
   }
 }
+
+extension StudentMapper on StudentEntity {
+  Student get toDomain {
+    return Student(
+      id: id,
+      name: name,
+    );
+  }
+}

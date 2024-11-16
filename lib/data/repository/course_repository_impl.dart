@@ -1,6 +1,8 @@
 import 'package:myapp/data/datasource/local_course_datasource.dart';
 import 'package:myapp/data/localstorage/college_localstorage/entities/course_entity.dart';
+import 'package:myapp/data/localstorage/college_localstorage/entities/student_entity.dart';
 import 'package:myapp/domain/mapper/course_mapper.dart';
+import 'package:myapp/domain/mapper/student_mapper.dart';
 import 'package:myapp/domain/model/course.dart';
 import 'package:myapp/domain/model/student.dart';
 import 'package:myapp/domain/model/teacher.dart';
@@ -33,9 +35,10 @@ class CourseRepositoryImpl extends CourseRepository {
   }
 
   @override
-  Student createStudent(String name) {
-    // TODO: implement createStudent
-    throw UnimplementedError();
+  Future<Student> createStudent(String name) async {
+    final input = StudentEntity(name: name);
+    final result = await localCourseDatasource.createStudent(input);
+    return result.toDomain;
   }
 
   @override

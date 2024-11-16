@@ -6,7 +6,7 @@ abstract class CourseRepository {
   List<Course> getAllCourse();
   List<Student> getStudentsByCourseId(int courseId);
   Future<Course> createCourse(String name);
-  Student createStudent(String name);
+  Future<Student> createStudent(String name);
   Teacher createTeacher(String name);
   Course assignStudentToCourse({required int courseId, required int studentId});
   Course assignTeacherToCourse({required int courseId, required int teacherId});

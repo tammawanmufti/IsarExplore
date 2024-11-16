@@ -27,7 +27,7 @@ class CourseDetailPage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return ListTile(
                       title: Text(course.students[index].name),
-                      subtitle: Text(course.students[index].id),
+                      subtitle: Text(course.students[index].id.toString()),
                     );
                   }))
         ],
@@ -36,9 +36,9 @@ class CourseDetailPage extends StatelessWidget {
         onPressed: () async {
           final name = await showAdaptiveDialog(
               context: context,
-              builder: (context) => const AddDialog(title: 'Add Course'));
+              builder: (context) => const AddDialog(title: 'Add Student'));
           if (name != null) {
-            context.read<CourseCubit>().createAndAssignStudent(name);
+            context.read<CourseCubit>().createAndAssignStudent(name, course.id);
           }
         },
         child: const Icon(Icons.add),
