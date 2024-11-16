@@ -9,7 +9,7 @@ class Course with _$Course {
   const factory Course({
     required String id,
     required String name,
-    required Teacher teacher,
-    required List<Student> students,
+    required Teacher? teacher,
+    @Default([]) List<Student> students,
   }) = _Course;
 }

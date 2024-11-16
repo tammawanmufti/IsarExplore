@@ -22,7 +22,6 @@ environment:
   sdk: ^3.5.3
 
 
-isar_version: &isar_version 3.1.8
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
 # consider running `flutter pub upgrade --major-versions`. Alternatively,
@@ -37,15 +36,20 @@ dependencies:
   flutter_bloc: ^8.1.6
   freezed_annotation: ^2.4.4
   isar: 
-    version: *isar_version
+    version: 3.1.8
     hosted: https://pub.isar-community.dev/
   isar_flutter_libs: # contains Isar Core
-    version: *isar_version
+    version: 3.1.8
     hosted: https://pub.isar-community.dev/
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  path_provider: ^2.1.5
+  path: ^1.9.0
+  synchronized: ^3.3.0+3
+  provider: ^6.1.2
+
 
 dev_dependencies:
   flutter_test:
@@ -61,7 +65,7 @@ dev_dependencies:
   flutter_lints: ^4.0.0
   json_serializable: ^6.8.0
   isar_generator: 
-    version: *isar_version
+    version: 3.1.8
     hosted: https://pub.isar-community.dev/
 
 # For information on the generic Dart part of this file, see the
