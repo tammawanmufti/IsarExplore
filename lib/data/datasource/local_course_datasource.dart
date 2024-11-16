@@ -7,7 +7,7 @@ abstract class LocalCourseDataSource {
   List<CourseEntity> getAllCourses();
   List<StudentEntity>? getStudentsByCourseId(Id courseId);
   TeacherEntity? getTeacherByCourseId(Id courseId);
-  CourseEntity createCourse(CourseEntity input);
-  StudentEntity createStudent(StudentEntity input);
-  TeacherEntity createTeacher(TeacherEntity input);
+  Future<CourseEntity> createCourse(CourseEntity input);
+  Future<StudentEntity> createStudent(StudentEntity input);
+  Future<TeacherEntity> createTeacher(TeacherEntity input);
 }

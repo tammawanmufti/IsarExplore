@@ -5,7 +5,7 @@ part 'student.freezed.dart';
 @freezed
 class Student with _$Student {
   const factory Student({
-    required String id,
+    required int id,
     required String name,
   }) = _Student;
 }

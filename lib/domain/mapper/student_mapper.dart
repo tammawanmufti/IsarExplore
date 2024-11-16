@@ -6,7 +6,7 @@ extension IsarLinksStudentMapper on IsarLinks<StudentEntity> {
   List<Student> get toDomain {
     return map(
       (entity) => Student(
-        id: "${entity.id}",
+        id: entity.id,
         name: entity.name,
       ),
     ).toList();

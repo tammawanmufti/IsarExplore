@@ -5,11 +5,17 @@ import 'package:myapp/domain/model/course.dart';
 
 extension IsarCollectionCourseMapper on List<CourseEntity> {
   List<Course> get toDomain {
-    return map((entity) => Course(
-          id: '${entity.id}',
-          name: entity.name,
-          teacher: entity.teacher.toDomain,
-          students: entity.students.toDomain,
-        )).toList();
+    return map((entity) => entity.toDomain).toList();
+  }
+}
+
+extension CourseMapper on CourseEntity {
+  Course get toDomain {
+    return Course(
+      id: id,
+      name: name,
+      teacher: teacher.toDomain,
+      students: students.toDomain,
+    );
   }
 }

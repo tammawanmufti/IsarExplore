@@ -7,7 +7,7 @@ part 'course.freezed.dart';
 @freezed
 class Course with _$Course {
   const factory Course({
-    required String id,
+    required int id,
     required String name,
     required Teacher? teacher,
     @Default([]) List<Student> students,

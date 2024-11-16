@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/features/courses_page.dart';
+import 'package:myapp/features/providers.dart';
 
 void main() {
   runApp(const MyApp());

@@ -10,45 +10,46 @@ class LocalCourseDatasourceImpl extends LocalCourseDataSource {
   final CollegeLocalDB db;
 
   @override
-  CourseEntity createCourse(CourseEntity input) {
-    db().writeTxnSync(() {
-      db().courseEntitys.put(input);
+  Future<CourseEntity> createCourse(CourseEntity input) async {
+    await db().writeTxn(() async {
+      await db().courseEntitys.put(input);
+    });
+
+    return input;
+  }
+
+  @override
+  Future<StudentEntity> createStudent(StudentEntity input) async {
+    await db().writeTxn(() async {
+      await db().studentEntitys.put(input);
     });
     return input;
   }
 
   @override
-  StudentEntity createStudent(StudentEntity input) {
-    db().writeTxnSync(() {
-      db().studentEntitys.put(input);
-    });
-    return input;
-  }
-
-  @override
-  TeacherEntity createTeacher(TeacherEntity input) {
-    db().writeTxnSync(() {
-      db().teacherEntitys.put(input);
+  Future<TeacherEntity> createTeacher(TeacherEntity input) async {
+    await db().writeTxn(() async {
+      await db().teacherEntitys.put(input);
     });
     return input;
   }
 
   @override
   List<CourseEntity> getAllCourses() {
-    return db().courseEntitys.where().findAllSync();
+    return db.instance.courseEntitys.where().findAllSync();
   }
 
   @override
   List<StudentEntity> getStudentsByCourseId(Id courseId) {
     final course =
-        db().courseEntitys.filter().idEqualTo(courseId).findFirstSync();
+        db.instance.courseEntitys.filter().idEqualTo(courseId).findFirstSync();
     return course?.students.toList() ?? [];
   }
 
   @override
   TeacherEntity? getTeacherByCourseId(Id courseId) {
     final course =
-        db().courseEntitys.filter().idEqualTo(courseId).findFirstSync();
+        db.instance.courseEntitys.filter().idEqualTo(courseId).findFirstSync();
     return course?.teacher.value;
   }
 }

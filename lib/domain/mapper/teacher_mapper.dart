@@ -6,7 +6,7 @@ extension TeacherMapper on IsarLink<TeacherEntity> {
   Teacher? get toDomain {
     if (value != null) {
       return Teacher(
-        id: '${value!.id}',
+        id: value!.id,
         name: value!.name,
       );
     }

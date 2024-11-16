@@ -1,4 +1,5 @@
 import 'package:myapp/data/datasource/local_course_datasource.dart';
+import 'package:myapp/data/localstorage/college_localstorage/entities/course_entity.dart';
 import 'package:myapp/domain/mapper/course_mapper.dart';
 import 'package:myapp/domain/model/course.dart';
 import 'package:myapp/domain/model/student.dart';
@@ -25,9 +26,10 @@ class CourseRepositoryImpl extends CourseRepository {
   }
 
   @override
-  Course createCourse(String name) {
-    // TODO: implement createCourse
-    throw UnimplementedError();
+  Future<Course> createCourse(String name) async {
+    final input = CourseEntity(name: name);
+    final result = await localCourseDatasource.createCourse(input);
+    return result.toDomain;
   }
 
   @override

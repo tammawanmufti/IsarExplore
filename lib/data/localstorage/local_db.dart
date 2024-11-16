@@ -5,30 +5,23 @@ import 'package:synchronized/synchronized.dart';
 abstract class LocalDB {
   LocalDB({
     required this.collectionSchemas,
-  }) {
-    init();
-  }
+  });
 
-  Isar? instance;
+  late final Isar instance;
   final List<CollectionSchema> collectionSchemas;
 
+  static Lock lock = Lock();
+
   Future<void> init() async {
-    try {
-      final dir = await getApplicationDocumentsDirectory();
-      instance = Isar.openSync(
-        collectionSchemas,
-        directory: dir.path,
-        inspector: true,
-      );
-    } catch (e) {
-      print(e);
-    }
+    final dir = await getApplicationDocumentsDirectory();
+    instance = await Isar.open(
+      collectionSchemas,
+      directory: dir.path,
+      inspector: true,
+    );
   }
 
   Isar call() {
-    if (instance == null || !instance!.isOpen) {
-      init();
-    }
-    return instance!;
+    return instance;
   }
 }

@@ -1,45 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myapp/data/datasource/local_course_datasource.dart';
-import 'package:myapp/data/datasource/local_course_datasource_impl.dart';
-import 'package:myapp/data/localstorage/college_localstorage/college_local_db.dart';
-import 'package:myapp/data/repository/course_repository_impl.dart';
-import 'package:myapp/domain/repository/course_repository.dart';
+import 'package:myapp/features/add_dialog.dart';
+import 'package:myapp/features/course_detail_page.dart';
 import 'package:myapp/features/cubit/course_cubit.dart';
-import 'package:provider/provider.dart';
-
-class AppProviders extends StatelessWidget {
-  const AppProviders({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<CollegeLocalDB>(create: (context) => CollegeLocalDB()..init()),
-        Provider<LocalCourseDataSource>(
-          create: (context) => LocalCourseDatasourceImpl(
-            context.read(),
-          ),
-        ),
-        Provider<CourseRepository>(
-          create: (context) => CourseRepositoryImpl(
-            localCourseDatasource: context.read(),
-          ),
-        ),
-      ],
-      child: MultiBlocProvider(
-        providers: [
-          BlocProvider(
-            create: (context) => CourseCubit(
-              courseRepository: context.read(),
-            ),
-          ),
-        ],
-        child: const CoursePage(),
-      ),
-    );
-  }
-}
 
 class CoursePage extends StatefulWidget {
   const CoursePage({
@@ -74,11 +37,28 @@ class _CoursePageState extends State<CoursePage> {
                 itemCount: courses.length,
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return CourseDetailPage(course: courses[index]);
+                      }));
+                    },
                     title: Text(courses[index].name),
                   );
                 });
           });
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final courseName = await showAdaptiveDialog(
+              context: context,
+              builder: (context) => const AddDialog(title: 'Add Course'));
+          if (mounted && courseName != null) {
+            context.read<CourseCubit>().createCourse(courseName);
+          }
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
