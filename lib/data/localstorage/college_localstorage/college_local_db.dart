@@ -9,5 +9,5 @@ class CollegeLocalDB extends LocalDB {
           CourseEntitySchema,
           StudentEntitySchema,
           TeacherEntitySchema
-        ]);
+        ], name: 'College');
 }

@@ -40,4 +40,23 @@ class CourseDetailCubit extends Cubit<CourseDetailState> {
         courseId: courseId, studentId: student.id);
     loadCourse(courseId);
   }
+
+  Future<void> createAndAssignTeacher(
+    String name,
+  ) async {
+    final courseId = state.maybeWhen(
+      loaded: (course) => course.id,
+      orElse: () => null,
+    );
+
+    if (courseId == null) {
+      emit(const CourseDetailState.error(message: 'Course not found'));
+      return;
+    }
+
+    final teacher = await courseRepository.createTeacher(name);
+    await courseRepository.assignTeacherToCourse(
+        courseId: courseId, teacherId: teacher.id);
+    loadCourse(courseId);
+  }
 }

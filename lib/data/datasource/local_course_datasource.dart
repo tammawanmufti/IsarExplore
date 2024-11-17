@@ -12,6 +12,7 @@ abstract class LocalCourseDataSource {
   Future<TeacherEntity> createTeacher(TeacherEntity input);
   Future<bool> assignStudentToCourse(
       {required int courseId, required int studentId});
-
+  Future<bool> assignTeacherToCourse(
+      {required int courseId, required int teacherId});
   CourseEntity? getCourse(int courseId);
 }

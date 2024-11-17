@@ -22,7 +22,8 @@ class _AddDialogState extends State<AddDialog> {
       actions: [
         ElevatedButton.icon(
             onPressed: () {
-              Navigator.of(context).pop(_controller.text);
+              Navigator.of(context)
+                  .pop(_controller.text.isNotEmpty ? _controller.text : null);
             },
             label: const Text('save'))
       ],

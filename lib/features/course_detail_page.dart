@@ -31,6 +31,19 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
             loaded: (course) => Column(
               children: [
                 ListTile(
+                  onTap: () async {
+                    if (course.teacher == null) {
+                      final name = await showAdaptiveDialog(
+                          context: context,
+                          builder: (context) =>
+                              const AddDialog(title: 'Add Teacher'));
+                      if (name != null) {
+                        context
+                            .read<CourseDetailCubit>()
+                            .createAndAssignTeacher(name);
+                      }
+                    }
+                  },
                   title: Text(course.teacher?.name ?? 'No Teacher Assigned'),
                   subtitle: const Text('teacher'),
                 ),

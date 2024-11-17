@@ -5,10 +5,12 @@ import 'package:synchronized/synchronized.dart';
 abstract class LocalDB {
   LocalDB({
     required this.collectionSchemas,
+    required this.name,
   });
 
   late final Isar instance;
   final List<CollectionSchema> collectionSchemas;
+  final String name;
 
   static Lock lock = Lock();
 
@@ -16,6 +18,7 @@ abstract class LocalDB {
     final dir = await getApplicationDocumentsDirectory();
     instance = await Isar.open(
       collectionSchemas,
+      name: name,
       directory: dir.path,
       inspector: true,
     );
